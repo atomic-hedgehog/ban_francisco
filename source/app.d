@@ -1,5 +1,4 @@
 import vibe.d;
-import ban.annoyances;
 
 shared static this()
 {
@@ -13,20 +12,16 @@ shared static this()
 
 }
 
-void hello(HTTPServerRequest req, HTTPServerResponse res)
-{
-	res.writeBody("Wrong!");
-}
-
 void annoy(HTTPServerRequest req, HTTPServerResponse res) {
   import vibe.http.proxy;
-  import std.stdio;
+  import ban.annoyances;
   import ban.geo;
 
   logInfo("Proxying!");
   auto ipAddress = req.peer;
 
-//  ipAddress = "208.80.152.201";
+  //example SF ip address:
+  //  ipAddress = "208.80.152.201";
   if(isIpFromCity(ipAddress, "San Francisco")) {
     logInfo("User is scum!");
     annoyUser(80);
